@@ -2,6 +2,15 @@ create database if not exists academic_erp;
 
 use academic_erp;
 
+create table if not exists employee (
+    employee_id bigint auto_increment primary key,
+    first_name varchar(30) not null,
+    last_name varchar(30),
+    email varchar(255) unique not null,
+    department_id bigint not null,
+    password varchar(255) not null
+);
+
 create table if not exists organisation (
     id bigint auto_increment primary key,
     name varchar(255) not null,

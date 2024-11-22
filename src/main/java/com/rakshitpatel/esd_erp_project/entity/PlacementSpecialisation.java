@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "placement_specialisation")
 public class PlacementSpecialisation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

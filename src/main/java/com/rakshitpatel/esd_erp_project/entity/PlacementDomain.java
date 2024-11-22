@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "placement_domain")
 public class PlacementDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
