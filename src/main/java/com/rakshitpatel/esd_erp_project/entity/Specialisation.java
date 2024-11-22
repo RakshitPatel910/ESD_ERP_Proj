@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Specialisation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "code", nullable = false)
