@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
 
     private final EmployeeRepo employeeRepo;
-    private final EmployeeService employeeService;
     private final EncryptionService encryptionService;
     private final JWTHelper jwtHelper;
 
@@ -23,6 +22,10 @@ public class EmployeeService {
 
         if(!encryptionService.validate(req.password(), encryptionService.encryptPassword(employee.getPassword()))){
             return "Incorrect password";
+        }
+
+        if(employee.getDepartmentId() != 3){
+            return "Employee not from Outreach Department";
         }
 
         return jwtHelper.generateToken(req.email());
