@@ -25,6 +25,8 @@ public class DataController {
 
     @GetMapping("/organisation")
     public ResponseEntity<List<Organisation>> getAllOrganisations() {
+        System.out.println("organisation : " );
+
         return ResponseEntity.ok(organisationService.getAllOrganisations());
     }
 

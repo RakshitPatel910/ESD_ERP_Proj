@@ -14,6 +14,7 @@ public class DomainService {
     private final DomainRepo domainRepo;
 
     public List<Domain> getAllDomain(){
+        System.out.println(domainRepo.findAll());
         return domainRepo.findAll();
     }
 
