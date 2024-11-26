@@ -35,9 +35,9 @@ public class Placement {
     @Column(name = "intake")
     private Integer intake;
 
-    @OneToMany(mappedBy = "placement", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "placement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlacementDomain> domains = new ArrayList<>();
 
-    @OneToMany(mappedBy = "placement", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "placement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlacementSpecialisation> specialisations = new ArrayList<>();
 }

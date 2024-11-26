@@ -30,5 +30,13 @@ public class EmployeeService {
 
         return jwtHelper.generateToken(req.email());
     }
+
+    public Boolean valToken(String token){
+        String email = jwtHelper.extractUsername(token);
+
+        Employee employee = employeeRepo.findByEmail(email).orElseThrow( () -> new RuntimeException("Employee not found with email: " + email));
+
+        return jwtHelper.validateToken(token, encryptionService.encryptPassword(employee.getPassword()));
+    }
     
 }

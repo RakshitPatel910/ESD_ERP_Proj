@@ -10,10 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("auth")
@@ -25,6 +22,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody @Valid LoginRequest loginRequest) {
         return ResponseEntity.ok(employeeService.login(loginRequest));
+    }
+
+    @PostMapping("/validateToken")
+    public ResponseEntity<Boolean> validateAuthToken(@RequestHeader("Authorization") String authToken) {
+        return ResponseEntity.ok(employeeService.valToken(authToken));
     }
 
 }

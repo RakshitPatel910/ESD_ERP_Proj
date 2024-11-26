@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @Builder
@@ -19,6 +21,7 @@ public class PlacementSpecialisation {
 
     @ManyToOne
     @JoinColumn(name = "placement_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Placement placement;
 
     @ManyToOne
