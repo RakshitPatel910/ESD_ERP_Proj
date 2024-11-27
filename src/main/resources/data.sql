@@ -85,3 +85,9 @@ SELECT 'employee', '1', 'employee1@gmail.com', 3, 'password'
 WHERE NOT EXISTS (
     SELECT 1 FROM employee WHERE email = 'employee1@gmail.com'
 );
+
+INSERT INTO employee (first_name, last_name, email, department_id, password)
+SELECT 'employee', '2', 'employee2@gmail.com', 3, 'password'
+WHERE NOT EXISTS (
+    SELECT 1 FROM employee WHERE email = 'employee2@gmail.com'
+);
