@@ -6,6 +6,7 @@ import com.rakshitpatel.esd_erp_project.helper.EncryptionService;
 import com.rakshitpatel.esd_erp_project.helper.JWTHelper;
 import com.rakshitpatel.esd_erp_project.repo.EmployeeRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,12 +21,19 @@ public class EmployeeService {
         Employee employee = employeeRepo.findByEmail(req.email())
                 .orElseThrow( () -> new RuntimeException("Employee not found with email: " + req.email()) );
 
-        if(!encryptionService.validate(req.password(), encryptionService.encryptPassword(employee.getPassword()))){
+        System.out.println("This is the email : " + employee.getEmail());
+
+        System.out.println("This is the enc pass : " + encryptionService.encryptPassword(employee.getPassword()));
+
+        if(!encryptionService.validate(req.password(), employee.getPassword())){
             return "Incorrect password";
         }
 
+        System.out.println("This is the dept id : " + employee.getDepartmentId());
+
         if(employee.getDepartmentId() != 3){
-            return "Employee not from Outreach Department";
+            throw new BadCredentialsException("Employee from non authorized department.");
+//            return "Employee not from Outreach Department";
         }
 
         return jwtHelper.generateToken(req.email());

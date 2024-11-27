@@ -79,15 +79,16 @@ INSERT INTO specialisation (code, name, description, cred_required)
 SELECT 'Robotics', 'Robotics', 'Focus on robotics and automation systems.', 128.0
 WHERE NOT EXISTS (SELECT 1 FROM specialisation WHERE code = 'Robotics' AND name = 'Robotics');
 
--- Employee Table
+-- Employee Table $2a$10$rrfaQZDWOO9bA7EThiC2DuD1hmdsV.EtCbhW5zPTLwFPk0bsfWVlS
 INSERT INTO employee (first_name, last_name, email, department_id, password)
-SELECT 'employee', '1', 'employee1@gmail.com', 3, 'password'
+-- SELECT 'employee', '1', 'employee1@gmail.com', 3, 'password'
+SELECT 'employee', '1', 'employee1@gmail.com', 3, '$2a$10$rrfaQZDWOO9bA7EThiC2DuD1hmdsV.EtCbhW5zPTLwFPk0bsfWVlS'
 WHERE NOT EXISTS (
     SELECT 1 FROM employee WHERE email = 'employee1@gmail.com'
 );
 
 INSERT INTO employee (first_name, last_name, email, department_id, password)
-SELECT 'employee', '2', 'employee2@gmail.com', 3, 'password'
+SELECT 'employee', '2', 'employee2@gmail.com', 1, '$2a$10$rrfaQZDWOO9bA7EThiC2DuD1hmdsV.EtCbhW5zPTLwFPk0bsfWVlS'
 WHERE NOT EXISTS (
     SELECT 1 FROM employee WHERE email = 'employee2@gmail.com'
 );
