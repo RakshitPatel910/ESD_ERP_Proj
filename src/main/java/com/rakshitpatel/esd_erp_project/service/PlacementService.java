@@ -3,6 +3,7 @@ package com.rakshitpatel.esd_erp_project.service;
 import com.rakshitpatel.esd_erp_project.dto.PlacementRequest;
 import com.rakshitpatel.esd_erp_project.entity.Placement;
 import com.rakshitpatel.esd_erp_project.entity.PlacementDomain;
+import com.rakshitpatel.esd_erp_project.helper.JWTHelper;
 import com.rakshitpatel.esd_erp_project.mapper.PlacementMapper;
 import com.rakshitpatel.esd_erp_project.repo.PlacementDomainRepo;
 import com.rakshitpatel.esd_erp_project.repo.PlacementRepo;
@@ -15,19 +16,23 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PlacementService {
 
-    @Autowired
-    private PlacementMapper placementMapper;
+    private final PlacementMapper placementMapper;
 
-    @Autowired
-    private PlacementRepo placementRepo;
+    private final PlacementRepo placementRepo;
 
-    @Autowired
-    private PlacementDomainRepo placementDomainRepo;
+    private final PlacementDomainRepo placementDomainRepo;
 
-    @Autowired
-    private PlacementSpecialisationRepo placementSpecialisationRepo;
+    private final PlacementSpecialisationRepo placementSpecialisationRepo;
 
-    public String addPlacementOffer(PlacementRequest req){
+    private final JWTHelper jwtHelper;
+
+    public String addPlacementOffer(PlacementRequest req, String token){
+        String username = jwtHelper.extractUsername(token);
+
+        if( !jwtHelper.validateToken(token, username) ){
+            throw new RuntimeException("Invalid token");
+        }
+
         Placement placement = placementMapper.toPlacement(req);
 
         placementRepo.save(placement);

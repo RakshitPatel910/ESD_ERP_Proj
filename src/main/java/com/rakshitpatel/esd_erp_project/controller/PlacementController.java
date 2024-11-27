@@ -6,10 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("placement")
@@ -20,7 +17,7 @@ public class PlacementController {
     private PlacementService placementService;
 
     @PostMapping
-    public ResponseEntity<String> addPlacementOffer(@RequestBody @Valid PlacementRequest req){
-        return ResponseEntity.ok(placementService.addPlacementOffer(req));
+    public ResponseEntity<String> addPlacementOffer(@RequestHeader("Authorization") String token, @RequestBody @Valid PlacementRequest req){
+        return ResponseEntity.ok(placementService.addPlacementOffer(req, token));
     }
 }
